@@ -1,0 +1,250 @@
+<mxfile host="app.diagrams.net" agent="ChatGPT">
+  <diagram id="aws-secure-architecture" name="Arquitetura AWS Segura">
+    <mxGraphModel dx="2525" dy="1327" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1450" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="whiteSpace=wrap;html=1;fillColor=#0F172A;strokeColor=#0F172A;fontColor=#FFFFFF;fontSize=18;align=center;verticalAlign=middle;spacing=8;rounded=1;arcSize=12;fontStyle=1;" value="ARQUITETURA CLOUD SEGURA — AWS&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;Defesa em camadas · WAF + ALB Multi-AZ · sub-redes privadas · S3 Endpoint · SSM&lt;/font&gt;" vertex="1">
+          <mxGeometry height="55" width="1300" x="250" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="users" parent="1" style="whiteSpace=wrap;html=1;fillColor=#E2E8F0;strokeColor=#64748B;fontColor=#0F172A;fontSize=12;align=center;verticalAlign=middle;spacing=8;rounded=1;arcSize=12;fontStyle=1;" value="Clientes / Internet&lt;br&gt;HTTPS 443 · HTTP 80 redireciona para 443" vertex="1">
+          <mxGeometry height="65" width="270" x="80" y="105" as="geometry" />
+        </mxCell>
+        <mxCell id="admin" parent="1" style="whiteSpace=wrap;html=1;fillColor=#E2E8F0;strokeColor=#64748B;fontColor=#0F172A;fontSize=12;align=center;verticalAlign=middle;spacing=8;rounded=1;arcSize=12;fontStyle=1;" value="Administrador&lt;br&gt;IAM + MFA" vertex="1">
+          <mxGeometry height="65" width="190" x="390" y="105" as="geometry" />
+        </mxCell>
+        <mxCell id="-wfOutIqEIn8aWDvlidX-1" edge="1" parent="1" source="igw" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;" target="admin" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="igw" parent="1" style="whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#EA580C;fontColor=#9A3412;fontSize=12;align=center;verticalAlign=middle;spacing=8;rounded=1;arcSize=12;fontStyle=1;" value="Internet Gateway (IGW)&lt;br&gt;Conexão da VPC com a internet" vertex="1">
+          <mxGeometry height="65" width="240" x="650" y="105" as="geometry" />
+        </mxCell>
+        <mxCell id="waf" parent="1" style="whiteSpace=wrap;html=1;fillColor=#D1FAE5;strokeColor=#059669;fontColor=#065F46;fontSize=12;align=center;verticalAlign=middle;spacing=8;rounded=1;arcSize=12;fontStyle=1;" value="AWS WAF&lt;br&gt;Regras gerenciadas · SQLi/XSS · rate limit&lt;br&gt;&lt;b&gt;Associado aos ALBs das duas AZs&lt;/b&gt;" vertex="1">
+          <mxGeometry height="85" width="300" x="1000" y="105" as="geometry" />
+        </mxCell>
+        <mxCell id="vpc" parent="1" style="whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#0284C7;fontColor=#0369A1;fontSize=15;align=center;verticalAlign=middle;spacing=8;fontStyle=1;" value="VPC customizada · 10.0.0.0/16" vertex="1">
+          <mxGeometry height="1100" width="1510" x="35" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="aza" parent="1" style="whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#60A5FA;fontColor=#1D4ED8;fontSize=13;align=center;verticalAlign=middle;spacing=8;fontStyle=1;dashed=1;dashPattern=6 4;" value="Zona de Disponibilidade A (AZ-a)" vertex="1">
+          <mxGeometry height="800" width="720" x="55" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="azb" parent="1" style="whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#60A5FA;fontColor=#1D4ED8;fontSize=13;align=center;verticalAlign=middle;spacing=8;fontStyle=1;dashed=1;dashPattern=6 4;" value="Zona de Disponibilidade B (AZ-b)" vertex="1">
+          <mxGeometry height="800" width="730" x="795" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="pub_a" parent="1" style="whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontColor=#92400E;fontSize=11;align=center;verticalAlign=middle;spacing=8;fontStyle=1;" value="Sub-rede pública A · 10.0.1.0/24" vertex="1">
+          <mxGeometry height="145" width="680" x="75" y="295" as="geometry" />
+        </mxCell>
+        <mxCell id="pub_b" parent="1" style="whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontColor=#92400E;fontSize=11;align=center;verticalAlign=middle;spacing=8;fontStyle=1;" value="Sub-rede pública B · 10.0.11.0/24" vertex="1">
+          <mxGeometry height="145" width="690" x="815" y="295" as="geometry" />
+        </mxCell>
+        <mxCell id="app_a" parent="1" style="whiteSpace=wrap;html=1;fillColor=#E0F2FE;strokeColor=#0284C7;fontColor=#075985;fontSize=11;align=center;verticalAlign=middle;spacing=8;fontStyle=1;" value="Sub-rede privada de aplicação A · 10.0.2.0/24" vertex="1">
+          <mxGeometry height="205" width="680" x="75" y="465" as="geometry" />
+        </mxCell>
+        <mxCell id="app_b" parent="1" style="whiteSpace=wrap;html=1;fillColor=#E0F2FE;strokeColor=#0284C7;fontColor=#075985;fontSize=11;align=center;verticalAlign=middle;spacing=8;fontStyle=1;" value="Sub-rede privada de aplicação B · 10.0.12.0/24" vertex="1">
+          <mxGeometry height="205" width="690" x="815" y="465" as="geometry" />
+        </mxCell>
+        <mxCell id="data_a" parent="1" style="whiteSpace=wrap;html=1;fillColor=#F3E8FF;strokeColor=#9333EA;fontColor=#6B21A8;fontSize=11;align=center;verticalAlign=middle;spacing=8;fontStyle=1;" value="Sub-rede privada de dados A · 10.0.3.0/24" vertex="1">
+          <mxGeometry height="210" width="680" x="75" y="695" as="geometry" />
+        </mxCell>
+        <mxCell id="data_b" parent="1" style="whiteSpace=wrap;html=1;fillColor=#F3E8FF;strokeColor=#9333EA;fontColor=#6B21A8;fontSize=11;align=center;verticalAlign=middle;spacing=8;fontStyle=1;" value="Sub-rede privada de dados B · 10.0.13.0/24" vertex="1">
+          <mxGeometry height="210" width="690" x="815" y="695" as="geometry" />
+        </mxCell>
+        <mxCell id="alb_a" parent="1" style="whiteSpace=wrap;html=1;fillColor=#F59E0B;strokeColor=#B45309;fontColor=#FFFFFF;fontSize=12;align=center;verticalAlign=middle;spacing=8;rounded=1;arcSize=12;fontStyle=1;" value="ALB público (AZ-a)&lt;br&gt;HTTPS 443 · certificado ACM" vertex="1">
+          <mxGeometry height="75" width="245" x="80" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="nat_a" parent="1" style="whiteSpace=wrap;html=1;fillColor=#FDBA74;strokeColor=#C2410C;fontColor=#7C2D12;fontSize=12;align=center;verticalAlign=middle;spacing=8;rounded=1;arcSize=12;fontStyle=1;" value="NAT Gateway A&lt;br&gt;Saída privada → IGW" vertex="1">
+          <mxGeometry height="75" width="220" x="510" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="alb_b" parent="1" style="whiteSpace=wrap;html=1;fillColor=#F59E0B;strokeColor=#B45309;fontColor=#FFFFFF;fontSize=12;align=center;verticalAlign=middle;spacing=8;rounded=1;arcSize=12;fontStyle=1;" value="ALB público (AZ-b)&lt;br&gt;HTTPS 443 · certificado ACM" vertex="1">
+          <mxGeometry height="75" width="245" x="820" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="nat_b" parent="1" style="whiteSpace=wrap;html=1;fillColor=#FDBA74;strokeColor=#C2410C;fontColor=#7C2D12;fontSize=12;align=center;verticalAlign=middle;spacing=8;rounded=1;arcSize=12;fontStyle=1;" value="NAT Gateway B&lt;br&gt;Saída privada → IGW" vertex="1">
+          <mxGeometry height="75" width="220" x="1250" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="ec2_a" parent="1" style="whiteSpace=wrap;html=1;fillColor=#BFDBFE;strokeColor=#2563EB;fontColor=#1E3A8A;fontSize=12;align=center;verticalAlign=middle;spacing=8;rounded=1;arcSize=12;fontStyle=1;" value="EC2 API (AZ-a)&lt;br&gt;TCP 8080 · SG-EC2 aceita somente SG-ALB&lt;br&gt;SSM Agent · IAM Role" vertex="1">
+          <mxGeometry height="105" width="390" x="220" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="ec2_b" parent="1" style="whiteSpace=wrap;html=1;fillColor=#BFDBFE;strokeColor=#2563EB;fontColor=#1E3A8A;fontSize=12;align=center;verticalAlign=middle;spacing=8;rounded=1;arcSize=12;fontStyle=1;" value="EC2 API (AZ-b)&lt;br&gt;TCP 8080 · SG-EC2 aceita somente SG-ALB&lt;br&gt;SSM Agent · IAM Role" vertex="1">
+          <mxGeometry height="105" width="390" x="960" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="rds_a" parent="1" style="whiteSpace=wrap;html=1;fillColor=#E9D5FF;strokeColor=#9333EA;fontColor=#581C87;fontSize=12;align=center;verticalAlign=middle;spacing=8;rounded=1;arcSize=12;fontStyle=1;" value="RDS PostgreSQL — Primário&lt;br&gt;TCP 5432 · somente SG-EC2&lt;br&gt;Criptografia KMS" vertex="1">
+          <mxGeometry height="105" width="390" x="220" y="755" as="geometry" />
+        </mxCell>
+        <mxCell id="rds_b" parent="1" style="whiteSpace=wrap;html=1;fillColor=#E9D5FF;strokeColor=#9333EA;fontColor=#581C87;fontSize=12;align=center;verticalAlign=middle;spacing=8;rounded=1;arcSize=12;fontStyle=1;" value="RDS PostgreSQL — Standby&lt;br&gt;Multi-AZ · failover automático&lt;br&gt;Criptografia KMS" vertex="1">
+          <mxGeometry height="105" width="390" x="960" y="755" as="geometry" />
+        </mxCell>
+        <mxCell id="vpce" parent="1" style="whiteSpace=wrap;html=1;fillColor=#D1FAE5;strokeColor=#059669;fontColor=#065F46;fontSize=13;align=center;verticalAlign=middle;spacing=8;rounded=1;arcSize=12;fontStyle=1;" value="Gateway Endpoint do S3&lt;br&gt;Rota privada · policy aws:SourceVpce" vertex="1">
+          <mxGeometry height="70" width="650" x="470" y="950" as="geometry" />
+        </mxCell>
+        <mxCell id="services" parent="1" style="whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#64748B;fontColor=#334155;fontSize=14;align=center;verticalAlign=middle;spacing=8;fontStyle=1;" value="SERVIÇOS AWS GERENCIADOS · FORA DA VPC" vertex="1">
+          <mxGeometry height="1100" width="570" x="1580" y="205" as="geometry" />
+        </mxCell>
+        <mxCell id="ssm" parent="1" style="whiteSpace=wrap;html=1;fillColor=#E2E8F0;strokeColor=#64748B;fontColor=#0F172A;fontSize=12;align=center;verticalAlign=middle;spacing=8;rounded=1;arcSize=12;fontStyle=1;" value="AWS Systems Manager / SSM Session Manager&lt;br&gt;Acesso administrativo sem SSH nem bastion&lt;br&gt;ssm:StartSession limitado por IAM/MFA" vertex="1">
+          <mxGeometry height="95" width="510" x="1610" y="265" as="geometry" />
+        </mxCell>
+        <mxCell id="secrets" parent="1" style="whiteSpace=wrap;html=1;fillColor=#F5D0FE;strokeColor=#C026D3;fontColor=#701A75;fontSize=11;align=center;verticalAlign=middle;spacing=8;rounded=1;arcSize=12;fontStyle=1;" value="AWS Secrets Manager&lt;br&gt;Credencial do RDS · GetSecretValue&lt;br&gt;Rotação conforme configuração" vertex="1">
+          <mxGeometry height="100" width="245" x="1610" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="kms" parent="1" style="whiteSpace=wrap;html=1;fillColor=#F5D0FE;strokeColor=#C026D3;fontColor=#701A75;fontSize=11;align=center;verticalAlign=middle;spacing=8;rounded=1;arcSize=12;fontStyle=1;" value="AWS KMS&lt;br&gt;Chaves de criptografia&lt;br&gt;RDS · S3 · Secrets Manager" vertex="1">
+          <mxGeometry height="100" width="245" x="1875" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="s3app" parent="1" style="whiteSpace=wrap;html=1;fillColor=#A7F3D0;strokeColor=#059669;fontColor=#065F46;fontSize=11;align=center;verticalAlign=middle;spacing=8;rounded=1;arcSize=12;fontStyle=1;" value="Amazon S3 — Bucket da aplicação&lt;br&gt;Block Public Access · SSE-KMS&lt;br&gt;Role EC2: GetObject/PutObject no prefixo&lt;br&gt;Bucket policy restringe via aws:SourceVpce" vertex="1">
+          <mxGeometry height="125" width="510" x="1610" y="540" as="geometry" />
+        </mxCell>
+        <mxCell id="audit" parent="1" style="whiteSpace=wrap;html=1;fillColor=#CBD5E1;strokeColor=#64748B;fontColor=#1E293B;fontSize=11;align=center;verticalAlign=middle;spacing=8;rounded=1;arcSize=12;fontStyle=1;" value="CloudTrail · CloudWatch · VPC Flow Logs&lt;br&gt;Logs do WAF/ALB · alarmes e monitoramento" vertex="1">
+          <mxGeometry height="85" width="510" x="1610" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="s3logs" parent="1" style="whiteSpace=wrap;html=1;fillColor=#A7F3D0;strokeColor=#059669;fontColor=#065F46;fontSize=11;align=center;verticalAlign=middle;spacing=8;rounded=1;arcSize=12;fontStyle=1;" value="Amazon S3 — Bucket de logs&lt;br&gt;Versionamento · escrita restrita aos serviços de log&lt;br&gt;Acesso de auditoria somente leitura" vertex="1">
+          <mxGeometry height="95" width="510" x="1610" y="835" as="geometry" />
+        </mxCell>
+        <mxCell id="notes" parent="1" style="whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#94A3B8;fontColor=#334155;fontSize=11;align=center;verticalAlign=middle;spacing=8;rounded=1;arcSize=12;" value="Regras essenciais&lt;br&gt;• Internet → ALB: 443; 80 apenas redireciona&lt;br&gt;• ALB → EC2: TCP 8080&lt;br&gt;• EC2 → RDS: TCP 5432&lt;br&gt;• EC2 → S3: HTTPS 443 via Gateway Endpoint&lt;br&gt;• EC2 → internet/SSM: saída via NAT, HTTPS 443&lt;br&gt;• Sem entrada direta da internet para EC2/RDS&lt;br&gt;• Sem portas 22/3389 abertas" vertex="1">
+          <mxGeometry height="285" width="510" x="1610" y="965" as="geometry" />
+        </mxCell>
+        <mxCell id="internet_igw" edge="1" parent="1" source="users" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2563EB;strokeWidth=2;endArrow=block;endFill=1;startArrow=none;startFill=1;fontSize=10;fontStyle=1;fontColor=#2563EB;labelBackgroundColor=#FFFFFF;exitX=0.48;exitY=0.041;exitDx=0;exitDy=0;exitPerimeter=0;" value="HTTPS 443 / HTTP 80">
+          <mxGeometry relative="1" x="-0.0114" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="215" y="107.7" />
+              <mxPoint x="215" y="90" />
+              <mxPoint x="770" y="90" />
+            </Array>
+            <mxPoint x="215" y="115" as="sourcePoint" />
+            <mxPoint x="770" y="115" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="igw_alba" edge="1" parent="1" source="igw" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D97706;strokeWidth=2;endArrow=block;endFill=1;startArrow=none;startFill=1;fontSize=10;fontStyle=1;fontColor=#D97706;labelBackgroundColor=#FFFFFF;" target="alb_a" value="Tráfego de entrada">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="770" y="220" />
+              <mxPoint x="220" y="220" />
+              <mxPoint x="220" y="315" />
+              <mxPoint x="222.5" y="315" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="igw_albb" edge="1" parent="1" source="igw" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D97706;strokeWidth=2;endArrow=block;endFill=1;startArrow=none;startFill=1;fontSize=10;fontStyle=1;fontColor=#D97706;labelBackgroundColor=#FFFFFF;" target="alb_b" value="Tráfego de entrada">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="790" y="210" />
+              <mxPoint x="960" y="210" />
+              <mxPoint x="960" y="315" />
+              <mxPoint x="942.5" y="315" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="alb_ec2a" edge="1" parent="1" source="alb_a" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2563EB;strokeWidth=2;endArrow=block;endFill=1;startArrow=none;startFill=1;fontSize=10;fontStyle=1;fontColor=#2563EB;labelBackgroundColor=#FFFFFF;" target="ec2_a" value="TCP 8080 · SG-ALB → SG-EC2">
+          <mxGeometry relative="1" x="-0.2174" y="10" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="220" y="430" />
+              <mxPoint x="220" y="490" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="alb_ec2b" edge="1" parent="1" source="alb_b" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2563EB;strokeWidth=2;endArrow=block;endFill=1;startArrow=none;startFill=1;fontSize=10;fontStyle=1;fontColor=#2563EB;labelBackgroundColor=#FFFFFF;" target="ec2_b" value="TCP 8080 · SG-ALB → SG-EC2">
+          <mxGeometry relative="1" x="-0.2174" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="960" y="430" />
+              <mxPoint x="960" y="490" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ec2a_rds" edge="1" parent="1" source="ec2_a" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#9333EA;strokeWidth=2;endArrow=block;endFill=1;startArrow=none;startFill=1;fontSize=10;fontStyle=1;fontColor=#9333EA;labelBackgroundColor=#FFFFFF;" target="rds_a" value="TCP 5432">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="415" y="640" />
+              <mxPoint x="415" y="730" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ec2b_rds" edge="1" parent="1" source="ec2_b" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#9333EA;strokeWidth=2;endArrow=block;endFill=1;startArrow=none;startFill=1;fontSize=10;fontStyle=1;fontColor=#9333EA;labelBackgroundColor=#FFFFFF;dashed=1;dashPattern=6 4;" target="rds_a" value="TCP 5432 · conexão ao endpoint primário">
+          <mxGeometry relative="1" x="-0.0258" as="geometry">
+            <Array as="points">
+              <mxPoint x="1370" y="600" />
+              <mxPoint x="1370" y="675" />
+              <mxPoint x="700" y="675" />
+              <mxPoint x="700" y="805" />
+              <mxPoint x="630" y="805" />
+              <mxPoint x="630" y="807.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rds_sync" edge="1" parent="1" source="rds_a" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#A855F7;strokeWidth=2;endArrow=block;endFill=1;startArrow=none;startFill=1;fontSize=10;fontStyle=1;fontColor=#A855F7;labelBackgroundColor=#FFFFFF;dashed=1;dashPattern=6 4;" target="rds_b" value="Replicação síncrona gerenciada · Multi-AZ">
+          <mxGeometry relative="1" x="0.0286" y="-22" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="790" y="840" />
+              <mxPoint x="790" y="840" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ec2a_s3" edge="1" parent="1" source="ec2_a" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#059669;strokeWidth=2;endArrow=block;endFill=1;startArrow=none;startFill=1;fontSize=10;fontStyle=1;fontColor=#059669;labelBackgroundColor=#FFFFFF;" target="vpce" value="HTTPS 443 · rota privada S3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="120" y="575" />
+              <mxPoint x="120" y="985" />
+              <mxPoint x="450" y="985" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ec2b_s3" edge="1" parent="1" source="ec2_b" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#059669;strokeWidth=2;endArrow=block;endFill=1;startArrow=none;startFill=1;fontSize=10;fontStyle=1;fontColor=#059669;labelBackgroundColor=#FFFFFF;" target="vpce" value="HTTPS 443 · rota privada S3">
+          <mxGeometry relative="1" x="-0.0154" as="geometry">
+            <Array as="points">
+              <mxPoint x="1480" y="590" />
+              <mxPoint x="1480" y="1030" />
+              <mxPoint x="1140" y="1030" />
+              <mxPoint x="1140" y="985" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vpce_s3bucket" edge="1" parent="1" source="vpce" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#059669;strokeWidth=2;endArrow=block;endFill=1;startArrow=none;startFill=1;fontSize=10;fontStyle=1;fontColor=#059669;labelBackgroundColor=#FFFFFF;dashed=1;dashPattern=6 4;" target="s3app" value="Acesso condicionado a aws:SourceVpce">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1510" y="985" />
+              <mxPoint x="1545" y="985" />
+              <mxPoint x="1545" y="600" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ec2a_nat" edge="1" parent="1" source="ec2_a" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#EA580C;strokeWidth=2;endArrow=block;endFill=1;startArrow=none;startFill=1;fontSize=10;fontStyle=1;fontColor=#EA580C;labelBackgroundColor=#FFFFFF;dashed=1;dashPattern=6 4;" target="nat_a" value="Saída HTTPS 443 via NAT A">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="180" y="570" />
+              <mxPoint x="90" y="570" />
+              <mxPoint x="90" y="420" />
+              <mxPoint x="600" y="420" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ec2b_nat" edge="1" parent="1" source="ec2_b" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#EA580C;strokeWidth=2;endArrow=block;endFill=1;startArrow=none;startFill=1;fontSize=10;fontStyle=1;fontColor=#EA580C;labelBackgroundColor=#FFFFFF;dashed=1;dashPattern=6 4;" target="nat_b" value="Saída HTTPS 443 via NAT B">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1400" y="570" />
+              <mxPoint x="1510" y="570" />
+              <mxPoint x="1510" y="420" />
+              <mxPoint x="1340" y="420" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="admin_iam_ssm" edge="1" parent="1" source="admin" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#DC2626;strokeWidth=2;endArrow=block;endFill=1;startArrow=none;startFill=1;fontSize=10;fontStyle=1;fontColor=#DC2626;labelBackgroundColor=#FFFFFF;dashed=1;dashPattern=6 4;" target="ssm" value="IAM + MFA · HTTPS 443">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="485" y="200" />
+              <mxPoint x="1560" y="200" />
+              <mxPoint x="1560" y="310" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="logs_to_bucket" edge="1" parent="1" source="audit" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#64748B;strokeWidth=1.5;endArrow=block;endFill=1;startArrow=none;startFill=1;fontSize=10;fontStyle=1;fontColor=#64748B;labelBackgroundColor=#FFFFFF;dashed=1;dashPattern=6 4;" target="s3logs" value="Entrega de logs">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1865" y="805" />
+              <mxPoint x="1865" y="825" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
